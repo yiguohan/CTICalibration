@@ -5,7 +5,13 @@
         <item
             android:id="@+id/nav_attendance"
             android:icon="@drawable/nav_location"
-            android:title="考勤签到"/>
+            android:title="考勤记录"/>
+
+        <item
+            android:id="@+id/nav_check"
+            android:icon="@drawable/ic_done"
+            android:title="打卡"/>
+
         <item
             android:id="@+id/nav_scan"
             android:icon="@drawable/nav_task"

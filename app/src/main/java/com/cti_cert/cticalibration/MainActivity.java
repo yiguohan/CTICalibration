@@ -2,6 +2,9 @@ package com.cti_cert.cticalibration;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -35,10 +38,17 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()){
                     case R.id.nav_attendance:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this,"考勤",Toast.LENGTH_SHORT).show();
+                        replaceFragment(new AttendanceFragment());
+                        Toast.makeText(MainActivity.this,"考勤记录",Toast.LENGTH_SHORT).show();
+                        break;
+                    case  R.id.nav_check:
+                        mDrawerLayout.closeDrawers();
+                        replaceFragment(new CheckFragment());
+                        Toast.makeText(MainActivity.this,"打卡",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_scan:
                         mDrawerLayout.closeDrawers();
+                        replaceFragment(new QRScanFragment());
                         Toast.makeText(MainActivity.this,"打开相机扫描二维码",Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -55,5 +65,13 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    /*动态加载Fragment*/
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout,fragment);
+        transaction.commit();
     }
 }
