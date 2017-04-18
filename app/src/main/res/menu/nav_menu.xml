@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/nav_location"
+            android:title="考勤签到"/>
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/nav_task"
+           android:title="流程确认"/>
+
+    </group>
+</menu>

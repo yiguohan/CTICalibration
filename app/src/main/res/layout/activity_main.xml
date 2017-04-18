@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -18,12 +19,12 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
     </FrameLayout>
 
-    <TextView
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:text="This is menu"
-        android:textSize="30sp"
-        android:background="#FFF"/>
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"/>
 
 </android.support.v4.widget.DrawerLayout>
