@@ -1,6 +1,7 @@
 package com.cti_cert.cticalibration.Ativities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -69,9 +71,26 @@ public class MainActivity extends BaseActivity {
                         break;
                     case  R.id.nav_quit:
                         mDrawerLayout.closeDrawers();
-                        ActivityCollector.finishAll();
-                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                        startActivity(intent);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage("真的不打算再瞅两眼？");
+                        builder.setTitle("大哥憋走");
+                        builder.setPositiveButton("撤了", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCollector.finishAll();
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton("拉倒", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        });
+                        builder.create().show();
+
+
                         break;
                     case R.id.nav_about:
                         mDrawerLayout.closeDrawers();
