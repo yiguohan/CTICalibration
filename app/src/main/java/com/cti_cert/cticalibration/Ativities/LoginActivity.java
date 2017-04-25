@@ -2,6 +2,7 @@ package com.cti_cert.cticalibration.Ativities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,12 +29,12 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 String account = accountEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
-                if (account.equals("admin") && password.equals("12345")){
+                if ((!TextUtils.isEmpty(account)) || (!TextUtils.isEmpty(password))) {
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
-                    Toast.makeText(LoginActivity.this,"密码或账号错误，请重新输入",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "工号或密码不能为空，请重新输入", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.acker.simplezxing.activity.CaptureActivity;
+import com.cti_cert.cticalibration.ActivityCollector;
 import com.cti_cert.cticalibration.Base.BaseActivity;
 import com.cti_cert.cticalibration.R;
 import com.cti_cert.cticalibration.SimpleFragmentPagerAdapter;
