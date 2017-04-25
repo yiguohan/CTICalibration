@@ -68,7 +68,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case  R.id.nav_quit:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this,"退出",Toast.LENGTH_SHORT).show();
+                        ActivityCollector.finishAll();
+                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_about:
                         mDrawerLayout.closeDrawers();
