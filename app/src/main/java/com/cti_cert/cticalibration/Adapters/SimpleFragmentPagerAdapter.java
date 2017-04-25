@@ -1,4 +1,4 @@
-package com.cti_cert.cticalibration;
+package com.cti_cert.cticalibration.Adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

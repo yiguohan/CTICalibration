@@ -2,16 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cti_cert.cticalibration.Fragments.AttendanceFragment">
+    tools:context="com.cti_cert.cticalibration.Fragments.AttendanceFragment"
+    android:background="#D7D7D7">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/text_attendance"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/attendance_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="打卡记录"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:layout_gravity="center"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>
