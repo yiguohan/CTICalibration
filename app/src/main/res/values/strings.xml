@@ -3,4 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_copyright_activity">关于我</string>
+    <string name="content_copyright_activity">You Could Type Something Here</string>
 </resources>

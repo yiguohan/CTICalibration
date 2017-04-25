@@ -94,7 +94,8 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.nav_about:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this,"关于",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, CopyrightActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return true;
@@ -102,6 +103,8 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    /*
+    * 调用第三方simplezxing进行二维码扫描*/
     private void startCaptureActivityForResult() {
         Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
         Bundle bundle = new Bundle();
