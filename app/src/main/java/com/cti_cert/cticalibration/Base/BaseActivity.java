@@ -1,8 +1,10 @@
-package com.cti_cert.cticalibration;
+package com.cti_cert.cticalibration.Base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.cti_cert.cticalibration.ActivityCollector;
 
 /**
  * Created by yiguo on 2017/4/18.

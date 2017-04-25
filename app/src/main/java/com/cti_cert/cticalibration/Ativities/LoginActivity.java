@@ -1,12 +1,14 @@
-package com.cti_cert.cticalibration;
+package com.cti_cert.cticalibration.Ativities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.cti_cert.cticalibration.Base.BaseActivity;
+import com.cti_cert.cticalibration.R;
 
 public class LoginActivity extends BaseActivity {
 

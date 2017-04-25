@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.cti_cert.cticalibration.Fragments.AttendanceFragment;
+import com.cti_cert.cticalibration.Fragments.CheckFragment;
+
 /**
  * Created by yiguo on 2017/4/18.
  */
