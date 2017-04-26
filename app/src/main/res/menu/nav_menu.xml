@@ -4,6 +4,10 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_attendance"
+            android:title="打卡签到" />
+        <item
             android:id="@+id/nav_scan"
             android:icon="@drawable/nav_task"
            android:title="流程确认"/>
