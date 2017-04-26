@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
 
                         break;
-                    case R.id.nav_about:
+                    case R.id.nav_copyright:
                         mDrawerLayout.closeDrawers();
                         Intent intent = new Intent(MainActivity.this, CopyrightActivity.class);
                         startActivity(intent);

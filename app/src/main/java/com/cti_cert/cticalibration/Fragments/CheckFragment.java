@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.SupportMapFragment;
@@ -26,6 +28,7 @@ public class CheckFragment extends Fragment {
 
     private SupportMapFragment mapFragment;
 
+    private Button btn_Check;
 
     public CheckFragment() {
         // Required empty public constructor
@@ -36,6 +39,13 @@ public class CheckFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: execute");
         View view = inflater.inflate(R.layout.fragment_check, container, false);
+        btn_Check = (Button) view.findViewById(R.id.attendance_check);
+        btn_Check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "已签到", Toast.LENGTH_SHORT).show();
+            }
+        });
         setUpMap();
         return view;
     }
