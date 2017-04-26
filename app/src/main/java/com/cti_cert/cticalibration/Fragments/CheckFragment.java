@@ -4,12 +4,14 @@ package com.cti_cert.cticalibration.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.SupportMapFragment;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.cti_cert.cticalibration.R;
 
 
@@ -17,6 +19,8 @@ import com.cti_cert.cticalibration.R;
  * A simple {@link Fragment} subclass.
  */
 public class CheckFragment extends Fragment {
+
+    private static final String TAG = "CheckFragment";
 
     private AMap aMap;
 
@@ -30,6 +34,7 @@ public class CheckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: execute");
         View view = inflater.inflate(R.layout.fragment_check, container, false);
         setUpMap();
         return view;
@@ -42,6 +47,7 @@ public class CheckFragment extends Fragment {
         if (mapFragment != null) {
             getChildFragmentManager().beginTransaction().remove(mapFragment).commitAllowingStateLoss();
         }
+        Log.d(TAG, "onDestroyView: execute");
         mapFragment = null;
         aMap = null;
     }
@@ -54,6 +60,12 @@ public class CheckFragment extends Fragment {
         if (aMap == null) {
             aMap = mapFragment.getMap();
         }
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW);
+        myLocationStyle.interval(2000);
+        aMap.setMyLocationStyle(myLocationStyle);
+        aMap.setMyLocationEnabled(true);
+
     }
 
 }

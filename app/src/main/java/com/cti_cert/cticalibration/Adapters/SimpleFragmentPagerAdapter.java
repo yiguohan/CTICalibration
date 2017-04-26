@@ -13,8 +13,8 @@ import com.cti_cert.cticalibration.Fragments.CheckFragment;
  */
 
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"打卡记录","考勤打卡","位置信息"};
+    final int PAGE_COUNT = 2;
+    private String tabTitles[] = new String[]{"打卡记录", "考勤打卡"};
     private Context context;
 
     public SimpleFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -29,9 +29,6 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
                 return new AttendanceFragment();
             case 1:
                 return new CheckFragment();
-            case 2:
-                return new CheckFragment();
-
         }
         return null;
     }
