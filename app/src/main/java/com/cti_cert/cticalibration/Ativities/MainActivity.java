@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.acker.simplezxing.activity.CaptureActivity;
 import com.cti_cert.cticalibration.ActivityCollector;
 import com.cti_cert.cticalibration.Base.BaseActivity;
+import com.cti_cert.cticalibration.Fragments.AttendanceFragment;
 import com.cti_cert.cticalibration.R;
 import com.cti_cert.cticalibration.Adapters.SimpleFragmentPagerAdapter;
 
@@ -29,11 +32,9 @@ public class MainActivity extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
 
-    private SimpleFragmentPagerAdapter pagerAdapter;
+    private FragmentManager fragmentManager;
 
-    private ViewPager viewPager;
-
-    private TabLayout tabLayout;
+    private FragmentTransaction fragmentTransaction;
 
     private static final int REQ_CODE_PERMISSION = 0x1111;
 
@@ -41,14 +42,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(),this);
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fragmentManager = getSupportFragmentManager();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
         ActionBar actionBar = getSupportActionBar();
@@ -61,6 +59,10 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.nav_attendance:
+                        mDrawerLayout.closeDrawers();
+                        loadFragment();
+                        break;
                     case R.id.nav_scan:
                         mDrawerLayout.closeDrawers();
                         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
@@ -159,5 +161,14 @@ public class MainActivity extends BaseActivity {
                     Toast.makeText(this, "You must agree the camera permission request before you use the code scan function", Toast.LENGTH_LONG).show();
                 }
         }
+    }
+
+    /*
+    * 动态加载Fragment*/
+    private void loadFragment() {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, new AttendanceFragment());
+        fragmentTransaction.commit();
+
     }
 }

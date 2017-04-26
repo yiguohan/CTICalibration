@@ -1,21 +1,21 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/attendance_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cti_cert.cticalibration.Fragments.AttendanceFragment"
-    android:background="#D7D7D7">
+    android:orientation="vertical"
+    tools:context="com.cti_cert.cticalibration.Fragments.AttendanceFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/attendance_swipeRefresh"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/attendance_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:background="@android:color/white" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
-</FrameLayout>
+</LinearLayout>

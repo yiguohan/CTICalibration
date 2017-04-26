@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.cti_cert.cticalibration.Fragments.AttendanceFragment;
+import com.cti_cert.cticalibration.Fragments.AttendanceRecordFragment;
 import com.cti_cert.cticalibration.Fragments.CheckFragment;
 
 /**
@@ -26,7 +26,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new AttendanceFragment();
+                return new AttendanceRecordFragment();
             case 1:
                 return new CheckFragment();
         }

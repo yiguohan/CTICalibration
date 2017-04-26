@@ -1,95 +1,43 @@
 package com.cti_cert.cticalibration.Fragments;
 
-
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.bumptech.glide.util.Util;
-import com.cti_cert.cticalibration.Adapters.AttendanceAdapter;
-import com.cti_cert.cticalibration.Beans.Attendance;
+import com.cti_cert.cticalibration.Adapters.SimpleFragmentPagerAdapter;
 import com.cti_cert.cticalibration.R;
-import com.cti_cert.cticalibration.Utils.DataUtil;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AttendanceFragment extends Fragment {
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private SimpleFragmentPagerAdapter pagerAdapter;
 
-    private AttendanceAdapter attendanceAdapter;
+    private ViewPager viewPager;
 
-    private List<Attendance> attendanceList;
+    private TabLayout tabLayout;
 
     public AttendanceFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        attendanceList = new ArrayList<Attendance>();
-        DataUtil.initAttendanceData(attendanceList);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_attendance, container, false);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.attendance_swipeRefresh);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshAttendance();
-            }
-        });
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.attendance_recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        attendanceAdapter = new AttendanceAdapter(attendanceList);
-        recyclerView.setAdapter(attendanceAdapter);
+        pagerAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager(), getContext());
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         return view;
     }
 
-    private void refreshAttendance() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        DataUtil.initAttendanceData(attendanceList);
-                        attendanceAdapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-
-            }
-        }).start();
-
-    }
 
 }
