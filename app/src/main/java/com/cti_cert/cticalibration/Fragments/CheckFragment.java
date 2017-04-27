@@ -4,17 +4,24 @@ package com.cti_cert.cticalibration.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.SupportMapFragment;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.cti_cert.cticalibration.R;
+import com.cti_cert.cticalibration.Utils.LocationUtil;
 
 
 /**
@@ -29,6 +36,10 @@ public class CheckFragment extends Fragment {
     private SupportMapFragment mapFragment;
 
     private Button btn_Check;
+
+    private AMapLocationClient mLocationClient;
+
+    private TextView locationInfo;
 
     public CheckFragment() {
         // Required empty public constructor
@@ -46,6 +57,8 @@ public class CheckFragment extends Fragment {
                 Toast.makeText(getContext(), "已签到", Toast.LENGTH_SHORT).show();
             }
         });
+        locationInfo = (TextView) view.findViewById(R.id.loacationInfo);
+        setUpLocationClient();
         setUpMap();
         return view;
     }
@@ -58,6 +71,8 @@ public class CheckFragment extends Fragment {
             getChildFragmentManager().beginTransaction().remove(mapFragment).commitAllowingStateLoss();
         }
         Log.d(TAG, "onDestroyView: execute");
+        mLocationClient.stopLocation();
+        mLocationClient.onDestroy();
         mapFragment = null;
         aMap = null;
     }
@@ -75,6 +90,33 @@ public class CheckFragment extends Fragment {
         myLocationStyle.interval(2000);
         aMap.setMyLocationStyle(myLocationStyle);
         aMap.setMyLocationEnabled(true);
+
+    }
+
+    /*初始化AMapLocationClient对象*/
+    private void setUpLocationClient() {
+
+        mLocationClient = new AMapLocationClient(getContext());
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                String info = LocationUtil.parseLoaction(aMapLocation);
+                if (TextUtils.isEmpty(info)) {
+                    Toast.makeText(getContext(), "解析地理信息异常", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                locationInfo.setText(info);
+            }
+        });
+
+        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy)
+                .setInterval(2000)
+                .setNeedAddress(true)
+                .setWifiScan(false);
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
+
 
     }
 
