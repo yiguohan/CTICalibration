@@ -27,16 +27,26 @@
             android:background="#66CCFF" />
 
         <RelativeLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/currentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="50dp"
+                android:text="00:00:00" />
+
+            <TextView
                 android:id="@+id/loacationInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/currentTime"
+                android:layout_marginTop="10dp"
+                android:text="位置" />
 
 
             <Button
@@ -45,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/loacationInfo"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:text="签到" />
         </RelativeLayout>
     </LinearLayout>

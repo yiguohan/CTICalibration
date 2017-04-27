@@ -2,6 +2,8 @@ package com.cti_cert.cticalibration.Fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -23,6 +25,9 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.cti_cert.cticalibration.R;
 import com.cti_cert.cticalibration.Utils.LocationUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +46,10 @@ public class CheckFragment extends Fragment {
 
     private TextView locationInfo;
 
+    private TextView currentTime;
+
+    private Handler handler;
+
     public CheckFragment() {
         // Required empty public constructor
     }
@@ -58,8 +67,19 @@ public class CheckFragment extends Fragment {
             }
         });
         locationInfo = (TextView) view.findViewById(R.id.loacationInfo);
+        currentTime = (TextView) view.findViewById(R.id.currentTime);
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    currentTime.setText(msg.obj.toString());
+                }
+                return true;
+            }
+        });
         setUpLocationClient();
         setUpMap();
+        getCurrentTime();
         return view;
     }
 
@@ -118,6 +138,25 @@ public class CheckFragment extends Fragment {
         mLocationClient.startLocation();
 
 
+    }
+
+    /*开线程获取系统时间*/
+    private void getCurrentTime() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                        String str = sdf.format(new Date());
+                        handler.sendMessage(handler.obtainMessage(1, str));
+                        Thread.sleep(1000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 }
